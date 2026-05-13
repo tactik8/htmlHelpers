@@ -1,0 +1,32 @@
+
+
+
+<!-- -->
+<div class="accordion" id="accordion-{{id}}">
+
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#accordion-collapse-{{id}}"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne"
+        >
+            {{title}}
+        </button>
+    </h2>
+    <div
+        id="accordion-collapse-{{id}}"
+        class="accordion-collapse collapse show"
+    >
+        <div class="accordion-body">
+           
+            {{> (lookup . 'partial') data }}
+           
+        
+        </div>
+    </div>
+</div>
+</div>

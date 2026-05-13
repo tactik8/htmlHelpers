@@ -1,0 +1,30 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px;">
+
+    <ul class="nav nav-pills flex-column mb-auto">
+
+
+        {{#each this}}
+
+
+        <li class="">
+            <a href="{{this.url}}" class="nav-link link-body-emphasis" aria-current="page">
+
+                {{#if (isdefined this.image)}}
+                <img src="{{this.image}}" alt="{{this.name}}" width="16" height="16"
+                    class="d-inline-block align-text-middle pe-none me-2">
+                {{/if}}
+
+
+                {{name}}
+            </a>
+        </li>
+
+
+
+
+        {{/each}}
+    </ul>
+
+
+
+</div>

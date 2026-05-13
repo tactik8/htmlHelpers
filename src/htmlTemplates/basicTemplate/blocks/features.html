@@ -1,0 +1,64 @@
+<div class="row g-4 py-5 ">
+
+
+    {{#each (toArray this)}}
+
+
+    <div class="feature col">
+
+
+        <div class="row">
+            <div class="col">
+                <div
+                    class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+
+
+                    {{#if (isdefined this.image)}}
+
+
+                    {{#each this.image}}
+
+                    {{#if @first}}
+                    <img src="{{this.contentUrl}}" class=" img-fluid" alt="Bootstrap Themes" loading="lazy">
+                    {{/if}}
+                    {{/each}}
+
+
+                    {{/if}}
+
+                </div>
+            </div>
+            <div class="col">
+
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+
+        <h3 class="fs-2 text-body-emphasis">{{this.headline}}</h3>
+        <p>{{this.text}}</p>
+
+
+        {{#if (isdefined this.potentialActions)}}
+
+
+        {{#each (first this.potentialActions)}}
+
+        <a href="{{this.url}}" class="icon-link">
+            {{this.name}}
+
+        </a>
+        {{/each}}
+
+
+        {{/if}}
+
+
+
+    </div>
+
+
+    {{/each}}
+
+</div>

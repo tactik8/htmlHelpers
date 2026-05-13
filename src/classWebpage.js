@@ -1,0 +1,168 @@
+
+import { htmlTemplates } from "./htmlTemplates/htmlTemplates.js"
+
+
+export class Webpage {
+    /**
+     *
+     *
+     * Initializing:
+     * dd some changes
+     * Initializing pages:
+     * let page = website.newPage(req)
+     *
+     */
+    constructor(website, record) {
+
+        this.website = website         // Website class object
+        this._record = record || {}
+        this._htmlPageContent = undefined
+        this._htmlPartsContent = undefined
+        this.htmlPageTemplate = undefined
+
+    }
+
+
+
+    get record() {
+        this._record.hasPart = this._record?.hasPart || []
+        return this._record;
+    }
+
+    set record(value) {
+        this._record = value;
+        this._record.hasPart = this._record?.hasPart || []
+    }
+
+    get name() {
+        return this._record.name;
+    }
+
+    set name(value) {
+        this._record.name = value;
+    }
+
+    get url() {
+        return this._record.url;
+    }
+    set url(value) {
+        this._record.url = value;
+    }
+
+    add(content) {
+        this._content += content;
+    }
+
+    get hasPart() {
+
+        this._record.hasPart = this._record.hasPart || []
+        this._record.hasPart = Array.isArray(this._record.hasPart) ? this._record.hasPart : [this._record.hasPart]
+
+        return this._record.hasPart
+    }
+
+    set hasPart(value) {
+        this._record.hasPart = this._record.hasPart || []
+        value = Array.isArray(value) ? value : [value];
+        this.hasPart = value
+    }
+
+
+    addPart(record, templatePath, classes, options) {
+
+        let sectionRecord = {
+            "@type": "Section",
+            "@id": String(crypto.randomUUID()),
+            "record": record,
+            "templateID": templatePath,
+            "classes": classes,
+            "options": options
+        }
+        this.hasPart.push(sectionRecord)
+
+    }
+
+
+
+
+    async renderHtmlContent(includeHeaders = false) {
+        /**
+         * Render the content of the page
+         * This is the content that is between the headers and footers
+         * 
+         */
+
+
+        let content = "";
+
+        // Ad headers
+        if (includeHeaders === true) {
+            content += await this.website.renderHtmlHeader()
+        }
+
+        // Render parts
+        let partsContent = ''
+        let position = 0
+        for (let r of this.hasPart) {
+
+            let htmlContent = await htmlTemplates.render(r.templateID, r.record, r.options)
+            let partContent = `<section class="${r.classes || ''}"> ${htmlContent}</section>`
+            partsContent += partContent
+            position += 1
+        }
+        this._htmlPartsContent = partsContent
+
+        content += partsContent
+
+        // Add footers
+        if (includeHeaders === true) {
+            content += await this.website.renderHtmlFooter()
+        }
+
+        return content
+
+
+    }
+
+
+    async renderHtmlPage() {
+        /**
+         * Render the content of the page
+         * This is the content that is between the headers and footers
+         * Render the content into the page template
+         * This is the content that is between the headers and footers
+         */
+
+
+        let content = "";
+
+        // Ad headers
+        content += await this.website.renderHtmlHeader()
+
+
+
+        // Render parts
+        if (!this._htmlContent) {
+            content += await this.renderHtmlContent()
+        } else {
+            content += this._htmlPartsContent
+        }
+
+
+        // Add footers
+        content += await this.website.renderHtmlFooter()
+
+
+        // Render content into page template
+        let record = this.record
+        record.text = content
+        content = await htmlTemplates.render(this.htmlPageTemplate, record)
+
+        this._htmlPageContent = content
+        return content
+
+    }
+
+
+
+}

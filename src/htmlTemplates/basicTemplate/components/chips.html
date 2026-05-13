@@ -1,0 +1,17 @@
+<div class="d-flex align-items-end justify-content-between">
+    <div class="d-flex align-items-center">
+        <img
+            class="rounded-circle me-3"
+            src="https://dummyimage.com/40x40/ced4da/6c757d"
+            alt="..."
+        />
+        <div class="small">
+            {{#if (getHeading this) }}
+            <div class="fw-bold">{{(getHeading this)}}</div>
+            {{/if}} 
+            {{#if (getText this) }}
+            <div class="text-muted">{{(getText this)}}</div>
+            {{/if}}
+        </div>
+    </div>
+</div>

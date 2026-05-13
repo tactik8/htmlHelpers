@@ -1,0 +1,36 @@
+{
+  "name": "library_name",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "build": "rm -rf dist && npm run build:cjs && npm run build:esm",
+    "build:cjs": "npx esbuild src/index.js --bundle --minify --platform=node --format=cjs --outfile=dist/index.cjs",
+    "build:esm": "npx esbuild src/index.js --bundle --minify --platform=node --format=esm --outfile=dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "Tactik8",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1",
+    "handlebars": "^4.7.9",
+    "uuid": "^14.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "jest": "^30.3.0"
+  }
+}

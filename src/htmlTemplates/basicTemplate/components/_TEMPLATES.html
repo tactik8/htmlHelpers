@@ -1,0 +1,46 @@
+
+
+{{#if (isdefined (getHeading this)) }}
+    <h5>
+        {{ getHeading this }}
+    </h5>
+
+{{/if}} 
+
+
+{{#if (isdefined (getText this)) }}
+
+    <p>
+        {{ getText this }}
+    </p>
+
+{{/if}} 
+
+
+{{! Single value of a possible array }}
+
+{{#if (isdefined this.url) }}
+
+    {{#each (toArray this.url) }}
+        {{ #if @first }}
+            <p>
+                {{ this.url }}
+            </p>
+        {{/if}}    
+    {{/each}}
+
+{{/if}} 
+
+
+
+{{! All values of a possible array }}
+
+{{#if (isdefined this.url) }}
+
+    {{#each (toArray this.url) }}
+            <p>
+                {{ this.url }}
+            </p>
+    {{/each}}
+
+{{/if}} 

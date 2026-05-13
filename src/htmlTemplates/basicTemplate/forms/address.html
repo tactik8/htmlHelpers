@@ -1,0 +1,81 @@
+{{#each this}}
+
+<form class="row g-3">
+
+
+    <div class="mb-3">
+
+
+
+        <div class="mb-3 col-12">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="john@smith.com" autocomplete="email">
+        </div>
+
+
+
+        <div class="mb-3 col-12">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="current-password">
+        </div>
+
+
+        {{! name }}
+        <div class="mb-3 col-6">
+            <label for="exampleInputEmail1" class="form-label">First name</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="john@smith.com" autocomplete="email" autocomplete="given-name">
+
+        </div>
+
+        <div class="mb-3 col-6">
+            <label for="exampleInputPassword1" class="form-label">Family name</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" autocomplete="family-name">
+        </div>
+
+
+        {{! address }}
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                autocomplete="street-address">
+        </div>
+        <div class="col-12">
+            <label for="inputAddress2" class="form-label">Address 2</label>
+            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"
+                autocomplete="">
+        </div>
+        <div class="col-md-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="inputCity" autocomplete="address-level2">
+        </div>
+        <div class="col-md-4">
+            <label for="inputState" class="form-label">State</label>
+            <select id="inputState" class="form-select" autocomplete="address-level1">
+                <option selected>Choose...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label for="inputZip" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="inputZip" autocomplete="postal-code">
+        </div>
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                    Check me out
+                </label>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+
+
+</form>
+
+{{/each}}

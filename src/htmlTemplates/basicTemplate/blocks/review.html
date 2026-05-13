@@ -1,0 +1,18 @@
+<span data-record-type="${record['@type']}" data-record-id="${record['@id']}">
+
+    <div class="card" style="width: 18rem;">
+        <div class="container">
+            ${c.starRating(record?.reviewRating)}
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">${base.heading1(record, options)}</h5>
+            <p class="card-text">"${base.headingDescription(record, options)}"</p>
+            <p class="card-text text-end">
+                <small>
+                    ${base.dateRelative(record, 'datePublished', options)}
+                </small>
+            </p>
+        </div>
+    </div>
+</span>

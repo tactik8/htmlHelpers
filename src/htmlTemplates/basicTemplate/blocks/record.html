@@ -1,0 +1,26 @@
+<div class="container col-xxl-8 px-4 py-5">
+
+
+    {{#each (toArray this.image)}}
+    {{#if @first}}
+
+    {{> image data=this }}
+
+    {{/if}}
+    {{/each}}
+</div>
+<div class="container col-xxl-8 px-4 py-5">
+    
+        {{#if (isdefined this.potentialActions)}}
+        <div class="float-end text-end">
+            {{> dropdown this.potentialActions}}
+        </div>
+
+        {{/if}}
+    
+
+
+    {{> record data=this }}
+
+
+</div>
