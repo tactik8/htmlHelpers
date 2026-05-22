@@ -1,0 +1,96 @@
+
+
+
+{{#if (isdefined depth)}}
+    <section id="{{this.[@id]}}">
+{{else}}
+     <article id="{{this.[@id]}}">
+{{/if}}
+   
+    <div >
+
+        {{! -----------------------------}}
+        {{!article}}
+
+        {{! -----------------------------}}
+        {{!headline}} 
+
+            <h{{default depth 1}}>{{this.headline}}</h{{default depth 1}}>
+        
+        {{! -----------------------------}}
+        {{!image}}
+                {{> image this.image}}
+
+        {{! -----------------------------}}
+        {{!abstract}}
+            {{#if (isdefined this.abstract)}}
+            <p class="lead">
+                {{textToHTML this.abstract}}
+            </p>
+            {{/if}}
+
+
+        {{! -----------------------------}}
+        {{!date}}
+ 
+            {{#if (isdefined this.datePublished)}}
+                {{#each (toArray this.datePublished)}}
+                    {{#if @first}}
+                        <p class="small text-muted">
+                            {{ this}}
+                        </p>
+                    {{/if}}
+                {{/each}}
+            {{/if}}
+
+
+        
+        {{! -----------------------------}}
+        {{!author}}
+
+            {{#if (isdefined this.author)}}
+                {{#each (toArray this.author)}}
+                    {{#if @first}}
+                        <p class="small text-muted">
+                            by {{getHeading this}}
+                        </p>
+                    {{/if}}
+                {{/each}}
+            {{/if}}
+
+        {{! -----------------------------}}
+        {{! text}}
+                {{#if (isdefined this.text)}}
+        
+                    {{textToHTML this.text}}
+             
+                {{/if}}
+
+        {{! -----------------------------}}
+        {{! articleBody}}
+                {{#if (isdefined this.articleBody)}}
+                <p>
+                    {{this.articleBody}}
+                </p>
+                {{/if}}
+
+        {{! -----------------------------}}
+        {{! parts}}
+                
+            {{#if (isdefined this.hasPart)}}
+
+                {{#each this.hasPart}}
+                    
+                        {{> articleBody this depth=(increment ../depth 1)}}
+    
+                {{/each}}  
+
+            {{/if}}
+
+    </div>
+
+{{#if (isdefined depth)}}
+    </section>
+{{else}}
+     </article>
+{{/if}}

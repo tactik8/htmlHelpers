@@ -17,7 +17,9 @@ import { readFile } from 'node:fs/promises';
 
 
 // Get the directory name of the current module
-const __dirname = dirname(fileURLToPath(import.meta.url));
+let __dirname = dirname(fileURLToPath(import.meta.url));
+
+//__dirname = join(__dirname, '..');
 
 
 export const htmlTemplates = {
@@ -88,18 +90,13 @@ async function getTemplate(templateID) {
 
 
     if (1 == 1) {
-        //let templateFilePath = join(__dirname, './htmlTemplates', `${templateID}.html`);
-        let templateFilePath = join(__dirname, `${templateID}.html`);
-
-        //let templateFilePath = `./htmlTemplates/${templateID}.html`;
+        //let templateFilePath = join(__dirname, '../../templates', `${templateID}.html`);
+        let templateFilePath = join(__dirname, 'templates', `${templateID}.html`);
 
         const data = await readFile(templateFilePath, 'utf8');
 
         content = data
 
-
-        // let req = await fetch(templateFilePath);
-        // content = await req.text();
     }
 
     let template = Handlebars.compile(content, { noEscape: true });

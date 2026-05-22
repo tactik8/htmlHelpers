@@ -1,0 +1,36 @@
+
+
+
+
+{{! takes ratingValue as parameter}}
+
+{{! Single value of a possible array }}
+
+{{#if (isdefined this.ratingValue) }}
+
+    {{#each (toArray this.ratingValue) }}
+       
+
+        {{#if @first }}
+
+          <span class="star-rating text-warning">
+
+            {{#each (getStars this)}}
+               
+                {{#with this as | var |}}
+                    {{> star var }}
+
+                {{/with}}    
+               
+            {{/each}}
+
+          </span>
+
+
+        {{/if}}
+       
+    {{/each}}
+
+{{/if}} 
+
+

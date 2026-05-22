@@ -1,0 +1,33 @@
+<div
+    class="kr-thing kr-card"
+    data-record-type="{{this?.['@type']}}"
+    data-record-id="{{this?.['@id']}}"
+>
+    <div class="card h-100" style="width: 18rem">
+
+        {{#if (isdefined this.image)}}
+
+            {{#each (toArray this.image)}}
+                {{#if @first}}
+                        <img
+                            src="{{this.contentUrl}}"
+                            class="card-img-top"
+                            alt="..."
+                        />
+                {{/if}}    
+            {{/each}}
+
+        {{/if}} 
+
+        <div class="card-body">
+            {{#if (getHeading this) }}
+            <h5 class="card-title text-truncate">{{ getHeading this }}</h5>
+
+            {{/if}} 
+            
+            {{#if (getText this) }}
+            <p class="card-text text-truncate">{{ getText this }}</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

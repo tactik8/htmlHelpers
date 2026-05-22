@@ -1,0 +1,29 @@
+<div class="container col-xxl-8 px-4 py-5">
+
+
+
+    {{> table2 data=this }}
+
+      
+    {{> pagination data=this }}
+    
+
+
+</div>
+
+
+<div class="container col-xxl-8 px-4 py-5">
+    
+        {{#if (isdefined this.potentialActions)}}
+        <div class="float-end text-end">
+            {{> dropdown this.potentialActions}}
+        </div>
+
+        {{/if}}
+    
+
+
+   
+
+
+</div>

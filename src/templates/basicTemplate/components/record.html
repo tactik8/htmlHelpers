@@ -1,0 +1,70 @@
+<div>
+    <dl class="row">
+        {{#each this}}
+        <dt class="col-sm-3">
+            {{@key}}:
+        </dt>
+
+
+        {{#if (isArray this)}}
+        <dd class="col-sm-9">
+            <ul class="list-unstyled">
+
+                {{#each this}}
+                <li>
+                    <details>
+                        <summary>{{ toValue this}}</summary>
+                        <dl class="row">
+                            {{#each this}}
+                            <dt class="col-sm-3">
+                                {{@key}}:
+                            </dt>
+                            <dd class="col-sm-9">
+                                {{toValue this}}
+                            </dd>
+                            {{/each}}
+                        </dl>
+                    </details>
+                </li>
+
+                {{/each}}
+            </ul>
+        </dd>
+        {{else}}
+
+        <dd class="col-sm-9">
+            {{#if (isObject this)}}
+
+            <details>
+
+
+                <summary>{{ toValue this}}</summary>
+                <dl class="row">
+                    {{#each this}}
+                    <dt class="col-sm-3">
+                        {{@key}}:
+                    </dt>
+                    <dd class="col-sm-9">
+                        {{toValue this}}
+                    </dd>
+                    {{/each}}
+                </dl>
+            </details>
+            {{else}}
+
+            {{toValue this}}
+
+
+            {{/if}}
+        </dd>
+
+        {{/if}}
+
+
+
+
+        {{/each}}
+
+
+    </dl>
+</div>

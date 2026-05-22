@@ -1,0 +1,22 @@
+
+
+{{!image}}
+        {{#if (isdefined this)}}
+
+            {{#each (toArray this)}}
+                 {{#if @first}}
+                    {{#if (isdefined this.contentUrl)}}
+
+                       <div class="" >
+                                <img
+                                    src="{{this.contentUrl}}"
+                                    class="img-thumbnail"
+                                    alt="..."
+                                    width="200"
+                                />
+                            </div>
+                        {{/if}}    
+                {{/if}}    
+            {{/each}}
+
+        {{/if}} 

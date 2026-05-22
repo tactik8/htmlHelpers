@@ -1,0 +1,59 @@
+<div
+    class="card mb-3"
+    style="max-width: 540px"
+    class="kr-thing kr-card"
+    data-record-type="{{ this.['@type'] }}"
+    data-record-id="{{ this.['@id'] }}"
+>
+    <div class="row ">
+
+
+        {{#if (isdefined this.image)}}
+
+            {{#each (toArray this.image)}}
+                {{#if @first}}
+                    <div class="col-md-3 g-0">
+                        <img
+                            src="{{this.contentUrl}}"
+                            class="img-fluid rounded-start"
+                            alt="..."
+                        />
+                    </div>
+                {{/if}}    
+            {{/each}}
+
+        {{/if}} 
+
+        
+      
+
+        <div class="col-md-9">
+            <div class="card-body">
+               
+                {{#if (getHeading this) }} 
+                    <h5 class="card-title text-truncate">
+                        {{ getHeading this }}  
+                   </h5>
+                {{/if}}
+              
+
+                {{#if (getText this) }}
+                    <p class="card-text text-truncate">
+                        {{ getText this }}
+                    </p>
+                {{/if}} 
+                
+                {{#if this.startTime }}
+                <p class="card-text text-truncate">
+                    <small class="text-body-secondary">
+                        {{ this.startTime }}
+                    </small>
+                </p>
+
+                {{/if}}
+                
+            </div>
+        </div>
+    </div>
+</div>
+

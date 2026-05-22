@@ -1,0 +1,20 @@
+
+
+{{#if (isdefined this)}}
+
+    {{#if (eq this "starEmpty")}}
+        {{> starEmpty}}
+    {{/if}}
+
+    {{#if (eq this "starHalf")}}
+        {{> starHalf}}
+    {{/if}}
+    
+    {{#if (eq this "starFull")}}
+        {{> starFull}}
+    {{/if}}
+
+{{else}}
+ {{> starEmpty}}
+
+{{/if}}

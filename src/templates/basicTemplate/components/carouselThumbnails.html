@@ -1,0 +1,85 @@
+{{! ------------------------------------------------}}
+{{! Carousel}}
+{{! ------------------------------------------------}}
+
+<div id="carousel_{{this.['@id']}}" class="carousel slide" data-bs-ride="carousel">
+
+
+   
+    {{! Carousel main images}}
+
+    <div class="carousel-inner">
+
+        {{#if (isdefined this.image)}}
+
+        <div class=" justify-content-between">
+
+            {{#each this.image}}
+
+            {{#if @first}}
+
+            <div class="carousel-item active" aria-current="true" aria-label="Slide {{@index}}">
+                <img src="{{this.contentUrl}}" class="d-block w-100" alt="...">
+            </div>
+            {{else}}
+
+            <div class="carousel-item">
+                <img src="{{this.contentUrl}}" class="d-block w-100" alt="..." aria-label="Slide {{@index}}">
+            </div>
+            {{/if}}
+
+            {{/each}}
+
+        </div>
+
+        {{/if}}
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_{{this.['@id']}}"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel_{{this.['@id']}}"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+
+
+
+
+    {{! Carousel thumbnails images}}
+
+
+
+    {{#if (isdefined this.image)}}
+    <div class="row">
+        
+        <div class="col">
+        </div>
+        {{#each this.image}}
+        <div class="col">
+
+            {{#if @first}}
+            <button type="button" data-bs-target="#carousel_{{this.['@id']}}" data-bs-slide-to="{{@index}}"
+                class="active" aria-current="true" aria-label="Slide {{@index}}">
+                <img src="{{this.contentUrl}}" class="d-block w-100" alt="...">
+            </button>
+            {{else}}
+            <button type="button" data-bs-target="#carousel_{{this.['@id']}}" data-bs-slide-to="{{@index}}"
+                aria-label="Slide {{@index}}">
+                <img src="{{this.contentUrl}}" class="d-block w-100" alt="...">
+
+            </button>
+            {{/if}}
+        </div>
+        {{/each}}
+        <div class="col">
+            </div>
+    </div>
+    {{/if}}
+</div>
+
+</div>

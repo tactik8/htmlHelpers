@@ -1,0 +1,49 @@
+{{#if (isdefined this.address)}} 
+    {{#each (toArray this.address)}} 
+        {{#if @first}}
+
+            <address style="font-style: normal">
+
+                {{#if (isdefined this.name)}}
+                <strong>{{this.name}}</strong><br />
+                {{/if}} 
+
+                {{#if (isdefined this.streetAddress)}} 
+                    {{this.streetAddress}}
+                    <br />
+                {{/if}} 
+
+                {{#if (isdefined this.addressLocality)}} 
+                    {{this.addressLocality}}{{#if (isdefined this.addressRegion)}}, {{/if}}
+                {{/if}} 
+                {{#if (isdefined this.addressRegion)}} 
+                    {{this.addressRegion}}
+                    
+                {{/if}} 
+
+                        {{#if (isdefined this.addressRegion)}} 
+                                
+                                <br />
+                        {{else}}
+
+                                    {{#if (isdefined this.addressLocality)}} 
+            
+                                            <br />
+                                
+                                        {{/if}} 
+                            {{/if}} 
+
+                {{#if (isdefined this.addressCountry)}} 
+                    {{this.addressCountry}}
+                    <br />
+                {{/if}} 
+
+                {{#if (isdefined this.postalCode)}} 
+                    {{this.postalCode}}
+                    <br />
+                {{/if}}
+
+            </address>
+        {{/if}} 
+    {{/each}} 
+{{/if}}

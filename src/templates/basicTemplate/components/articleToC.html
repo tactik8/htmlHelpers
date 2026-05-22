@@ -1,0 +1,46 @@
+
+<section id="{{this.[@id]}}">
+
+
+
+    {{! parts}}
+    {{#if (isdefined this.hasPart)}}
+
+
+        {{#if (isdefined depth)}}
+            <ul >
+        {{else}}
+            <nav class="navbar sticky-top ">
+                 <div class="container-fluid">
+            <ul class="list-unstyled">
+        {{/if}}
+        
+    
+            {{#each this.hasPart}}
+    
+                    <li>
+                        <a href="#{{this.[@id]}}">
+                            {{this.headline}}
+                        </a>
+                    </li>
+        
+                    {{> articleToC this depth=(increment ../depth 1)}}
+    
+    
+            {{/each}}  
+        </ul>
+      
+    
+        {{#if (isdefined depth)}}
+           
+        {{else}}
+            </nav>
+            </div>
+        {{/if}}
+
+      {{/if}}
+
+
+
+
+</section>
