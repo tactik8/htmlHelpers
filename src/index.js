@@ -10,4 +10,4 @@ export const htmlHelpers = {
 
 }
 
-export default htmlHelpers
+export default { htmlHelpers }
