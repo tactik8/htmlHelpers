@@ -79,7 +79,7 @@ function getHeading(record, options){
     if(record?.['@type'] === 'Organization'){
         let domain = record?.['url']
         try {
-            domain = new URL(record?.url).hostname
+            domain = (new URL(record?.url)).hostname
         } catch (error){}
         
         return record?.name || domain || record?.['@id']

@@ -472,7 +472,7 @@ export class WebSite extends BaseClass {
 
 
         try {
-        webpage.url = (new URL(url, this.url) || "").toString()
+            webpage.url = (new URL(url, this.url) || "").toString()
         } catch(err){}
         this.add(webpage)
         return webpage
