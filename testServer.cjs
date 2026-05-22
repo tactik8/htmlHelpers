@@ -1,12 +1,15 @@
 
-import helpers from 'jsonld_helpers' 
 
-import { records } from 'jsonld_helpers'
-
-import htmlHelpers from './dist/index.js'
+const helpers = require('jsonld_helpers')
 
 
-import express from 'express';
+const { records } = require('jsonld_helpers')
+
+const { htmlHelpers } = require('./dist/index.cjs')
+
+
+const express = require('express')
+
 const app = express();
 
 app.get('/', async (req, res, next) => {
@@ -28,6 +31,7 @@ app.listen(3002);
 async function test() {
     
 
+    console.log(htmlHelpers)
     let t1 = htmlHelpers.testRecords.article(0, 3)
 
     // 

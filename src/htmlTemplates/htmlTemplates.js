@@ -13,13 +13,16 @@ import Handlebars from "handlebars";
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
+
+
 import { readFile } from 'node:fs/promises';
 
 
 // Get the directory name of the current module
-let __dirname = dirname(fileURLToPath(import.meta.url));
 
-//__dirname = join(__dirname, '..');
+const currentDir = typeof __dirname !== 'undefined' 
+  ? __dirname 
+  : dirname(fileURLToPath(import.meta.url));
 
 
 export const htmlTemplates = {
