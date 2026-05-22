@@ -1,6 +1,6 @@
 {
   "name": "html_helpers",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -27,7 +27,7 @@
   "type": "module",
   "dependencies": {
     "express": "^5.2.1",
-    "handlebars": "^4.7.9",
+    "handlebars": "^4.7.7",
     "jsonld_helpers": "github:tactik8/jsonldHelpers_v1",
     "uuid": "^14.0.0"
   },
