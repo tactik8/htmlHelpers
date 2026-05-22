@@ -7,7 +7,9 @@ import * as helpers from 'jsonld_helpers'
 
 import { htmlFormatHelpers } from "../htmlFormatHelpers.js";
 
-import Handlebars from "handlebars";
+// import Handlebars from "handlebars";
+
+let Handlebars
 
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -110,6 +112,12 @@ async function init() {
     /**
      * precompiles templates and partials
      */
+
+    if (!Handlebars) {
+        const hModule = await import("handlebars");
+        Handlebars = hModule.default || hModule;
+    }
+
 
     if (isInitialized === true) {
         return;
