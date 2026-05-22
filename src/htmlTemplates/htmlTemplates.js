@@ -7,8 +7,7 @@ import * as helpers from 'jsonld_helpers'
 
 import { htmlFormatHelpers } from "../htmlFormatHelpers.js";
 
-import * as HandlebarsModule from "handlebars";
-const Handlebars = HandlebarsModule.default || HandlebarsModule;
+import Handlebars from "handlebars";
 
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
