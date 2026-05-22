@@ -472,7 +472,9 @@ export class WebSite extends BaseClass {
 
 
         try {
-            webpage.url = (new URL(url, this.url) || "").toString()
+            let w = new URL(url, this.url)
+
+            webpage.url = w.href || ""
         } catch(err){}
         this.add(webpage)
         return webpage
