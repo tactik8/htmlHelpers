@@ -7,7 +7,6 @@ import * as helpers from 'jsonld_helpers'
 
 import { htmlFormatHelpers } from "../htmlFormatHelpers.js";
 
-//import Handlebars from "https://esm.run/handlebars";
 import Handlebars from "handlebars";
 
 import { fileURLToPath } from 'node:url';
