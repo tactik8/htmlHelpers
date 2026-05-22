@@ -1,0 +1,33 @@
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            {{#each @columns}}
+                <th scope="col">{{this.name}}</th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    <tbody>
+        {{!-- Use |record| to name the current row --}}
+        {{#each (getValues this "result.itemListElement") as |record|}}
+        <tr>
+            {{!-- Use |col| to name the current column definition --}}
+            {{#each @columns as |col|}}
+                {{!-- 
+                   'record' stays accessible here thanks to Block Params.
+                   We pass 'record' and the specific key from the column 
+                --}}
+                <td>{{ toValue (getValue record col.propertyID)}}</td>
+            {{/each}}
+
+            {{! add dropdown for potentialActions }}
+            {{#if (isdefined record.potentialActions)}}
+            <td>
+                {{> dropdown record.potentialActions}}
+            </td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

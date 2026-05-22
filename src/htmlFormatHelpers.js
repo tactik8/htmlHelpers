@@ -36,7 +36,7 @@ function formatValue(value, options){
         }
         return value
     }
-    
+    return value
 }
 
 

@@ -2,27 +2,22 @@
     <thead class="table-dark">
         <tr>
 
-
-
             {{#each this}}
                 {{#if @first}}
                     {{#each this}}
-                        <th scope="col">{{@key}}</th>
+                    <th scope="col">{{@key}}</th>
                     {{/each}}
 
                     {{! add dropdown for potentialActions }}
                     {{#if (isdefined this.potentialActions)}}
                         <th>
-        
+
                         </th>
-        
+
                     {{/if}}
-                    
+
                 {{/if}}
 
-                
-
-            
             {{/each}}
 
         </tr>
@@ -31,25 +26,25 @@
     <tbody>
 
         {{#each this}}
-            <tr>
-                {{#each this}}
-                    <td>{{toValue this}}</td>
-                {{/each}}
+        <tr>
+            {{#each this}}
+            <td>{{toValue this}}</td>
+            {{/each}}
 
-                {{! add dropdown for potentialActions }}
-                {{#if (isdefined this.potentialActions)}}
-                    <td>
-                    {{> dropdown this.potentialActions}}
-                    </td>
+            {{! add dropdown for potentialActions }}
+            {{#if (isdefined this.potentialActions)}}
+            <td>
+                {{> dropdown this.potentialActions}}
+            </td>
 
-                {{/if}}
+            {{/if}}
 
-                
-            </tr>
-    
+
+        </tr>
+
         {{/each}}
 
-       
+
 
 
     </tbody>

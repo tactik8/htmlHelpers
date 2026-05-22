@@ -1,0 +1,157 @@
+
+
+
+
+    {{ setVar "n" (getValue this "result.numberOfItems") }}
+   
+     <div>n: {{@root.n}}</div>
+  
+  {{ setVar "l" this.query.limit }}
+    {{ setVar "o" this.query.offset }}
+
+
+    {{ setVar "pages" (divide @root.n @root.l) }}
+
+    {{ setVar "currentrecord" ( multiply @root.l (floor (divide @root.o @root.l ) )) }}
+
+    {{ setVar "currentpage" ( floor (divide @root.o @root.l ) ) }}
+
+    {{ setVar "minpage" ( floor (divide @root.n @root.l ) ) }}
+    {{ setVar "maxpage" ( floor (divide @root.n @root.l ) ) }}
+
+    
+
+        <div>p: {{ @root.maxpage }}</div>
+
+
+
+    {{ setVar "minpage"  0 }}
+   
+    {{ setVar "startpage" 0 }}
+
+
+
+    <div>maxPage: {{ @root.maxPage }}</div>
+
+
+{{!-- Visual Pagination UI --}}
+<nav aria-label="{{tableName}} pagination">
+  <ul class="pagination justify-content-center">
+
+
+
+
+
+
+
+
+    {{!-- First Button --}}
+    <li class="page-item {{#if isFirstPage}}disabled{{/if}}">
+      <a class="page-link"
+        href="{{@baseUrl}}?limit={{this.query.limit}}&offset=0&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}"
+        aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="d-none d-sm-inline">Previous</span>
+      </a>
+    </li>
+
+
+    {{!-- Previous Button --}}
+    <li class="page-item {{#if isFirstPage}}disabled{{/if}}">
+      <a class="page-link"
+        href="{{@baseUrl}}?limit={{this.query.limit}}&offset={{subtract this.query.offset this.query.limit}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}"
+        aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="d-none d-sm-inline">Previous</span>
+      </a>
+    </li>
+
+
+
+    {{!-- Page Numbers --}}
+
+
+
+    {{#if (ge (add this.query.offset (multiply -2 this.query.limit)) 0) }}
+
+    <li class="page-item ">
+      <a class="page-link"
+        href="{{@baseUrl}}?page={{prevPage}}&limit={{this.query.limit}}&offset={{add this.query.offset (multiply -2 this.query.limit)}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}">
+        {{add this.query.offset (multiply -2 this.query.limit)}}
+      </a>
+    </li>
+    {{/if}}
+
+    {{#if (ge (add this.query.offset (multiply -1 this.query.limit)) 0) }}
+
+    <li class="page-item ">
+      <a class="page-link"
+        href="{{@baseUrl}}?page={{prevPage}}&limit={{this.query.limit}}&offset={{add this.query.offset (multiply -1 this.query.limit)}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}">
+        {{add this.query.offset (multiply -1 this.query.limit)}}
+      </a>
+    </li>
+
+    {{/if}}
+
+    <li class="page-item active">
+      <a class="page-link"
+        href="{{@baseUrl}}?page={{prevPage}}&limit={{this.query.limit}}&offset={{add this.query.offset (multiply 0 this.query.limit)}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}">
+        {{add this.query.offset (multiply 0 this.query.limit)}}
+      </a>
+    </li>
+
+    {{#if (le (add this.query.offset (multiply 1 this.query.limit)) (getValue this "result.numberOfItems")) }}
+
+    <li class="page-item ">
+      <a class="page-link"
+        href="{{@baseUrl}}?page={{prevPage}}&limit={{this.query.limit}}&offset={{add this.query.offset (multiply 1 this.query.limit)}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}">
+        {{add this.query.offset (multiply 1 this.query.limit)}}
+      </a>
+    </li>
+
+    {{/if}}
+
+    {{#if (le (add this.query.offset (multiply 2 this.query.limit)) (getValue this "result.numberOfItems")) }}
+
+    <li class="page-item ">
+      <a class="page-link"
+        href="{{@baseUrl}}?page={{prevPage}}&limit={{this.query.limit}}&offset={{add this.query.offset (multiply 2 this.query.limit)}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}">
+        {{add this.query.offset (multiply 2 this.query.limit)}}
+      </a>
+    </li>
+    {{/if}}
+
+
+
+
+    {{#if (le (add this.query.offset (multiply 1 this.query.limit)) (getValue this "result.numberOfItems")) }}
+
+    {{!-- Next Button --}}
+    <li class="page-item {{#if isLastPage}}disabled{{/if}}">
+      <a class="page-link"
+        href="{{@baseUrl}}?limit={{this.query.limit}}&offset={{add this.query.offset this.query.limit}}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}"
+        aria-label="Next">
+        <span class="d-none d-sm-inline">Next </span>
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+
+    {{/if}}
+
+     {{!-- Last Button --}}
+    <li class="page-item {{#if isLastPage}}disabled{{/if}}">
+      <a class="page-link"
+        href="{{@baseUrl}}?limit={{this.query.limit}}&offset={{ multiply (floor (divide (subtract (getValue this 'result.numberOfItems') 1) this.query.limit)) this.query.limit }}&orderBy={{this.query.orderBy}}&orderDirection={{this.query.orderDirection}}"
+        aria-label="Next">
+        <span class="d-none d-sm-inline">Next </span>
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+{{ sequence this.query.offset (getValue this 'result.numberOfItems') this.query.limit }}
+
+<p></p>
+{{ sequence 4 }}
+

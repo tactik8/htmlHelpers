@@ -3,6 +3,8 @@
  * https://handlebarsjs.com/guide/#what-is-handlebars
  */
 
+import * as helpers from 'jsonld_helpers'
+
 import { htmlFormatHelpers } from "../htmlFormatHelpers.js";
 
 //import Handlebars from "https://esm.run/handlebars";
@@ -39,7 +41,7 @@ let isInitialized = false;
 // ---------------------------------------------
 
 
-async function getComponents(){
+async function getComponents() {
 
     let c = [
         "accordion",
@@ -51,22 +53,25 @@ async function getComponents(){
         "cardHorizontal",
         "carousel",
         "dropdown",
+        "header",
+        "footer",
         "image",
         "imageModal",
         "imageThumbnail",
         "listgroup",
         "menu",
         "modal",
+        "pagination",
         "record",
         "starRating",
         "table",
+        "table2",
         "testpartial"
     ];
 
-    console.log('c', c)
     return c
 
-    
+
 }
 
 
@@ -80,16 +85,16 @@ async function getTemplate(templateID) {
 
     let content;
 
-    
+
 
     if (1 == 1) {
         //let templateFilePath = join(__dirname, './htmlTemplates', `${templateID}.html`);
-        let templateFilePath = join(__dirname,  `${templateID}.html`);
+        let templateFilePath = join(__dirname, `${templateID}.html`);
 
         //let templateFilePath = `./htmlTemplates/${templateID}.html`;
 
-         const data = await readFile(templateFilePath, 'utf8');
-    
+        const data = await readFile(templateFilePath, 'utf8');
+
         content = data
 
 
@@ -113,7 +118,7 @@ async function init() {
 
     // Precompile and register components
     let components = await getComponents()
-    
+
 
     for (let component of components) {
         let template = await getTemplate(
@@ -125,7 +130,6 @@ async function init() {
 
     // Precompile and register blocks
     let blocks = [
-        
         "heroLeft",
     ];
 
@@ -155,19 +159,54 @@ async function init() {
     }
 
 
-    
+
     // register helpers
+
+    Handlebars.registerHelper("setVar", function (varName, varValue, options) {
+        options.data.root[varName] = varValue;
+    });
+
+
     Handlebars.registerHelper("isdefined", function (value) {
         return value !== undefined;
     });
     Handlebars.registerHelper("eq", function (value1, value2) {
-        console.log(value1, value2)
-        return value1 === value2
+        return value1 == value2
+    });
+
+    Handlebars.registerHelper("lt", function (value1, value2) {
+        return Number(value1) < Number(value2)
+    });
+
+    Handlebars.registerHelper("gt", function (value1, value2) {
+        return Number(value1) > Number(value2)
+    });
+
+    Handlebars.registerHelper("le", function (value1, value2) {
+        return Number(value1) < + Number(value2)
+    });
+
+    Handlebars.registerHelper("ge", function (value1, value2) {
+        return Number(value1) >= Number(value2)
+    });
+
+    Handlebars.registerHelper('round', function (value) {
+        return Math.round(Number(value))
+    });
+
+    Handlebars.registerHelper('floor', function (value) {
+        return Math.floor(Number(value))
     });
 
 
+    Handlebars.registerHelper("record_type", function (value) {
+
+        return new Handlebars.SafeString(value?.['@type'] || "");
+    });
+
     Handlebars.registerHelper("toValue", function (value) {
         let content = htmlFormatHelpers.value(value);
+        content = content === undefined ? "" : content
         return new Handlebars.SafeString(content);
     });
 
@@ -184,6 +223,11 @@ async function init() {
         return value;
     });
 
+    Handlebars.registerHelper("sequence", function (start, end, offset) {
+        offset = offset || 1
+        return Array.from({ length: (end - start + 1) / offset }, (_, i) => start + (i * offset));
+    });
+
     Handlebars.registerHelper("first", function (value) {
         value = Array.isArray(value) ? value : [value];
         return [value?.[0]];
@@ -196,42 +240,72 @@ async function init() {
     Handlebars.registerHelper("getText", function (value) {
         return htmlFormatHelpers.text(value);
     });
-    Handlebars.registerHelper('toJSON', function(obj) {
+    Handlebars.registerHelper('toJSON', function (obj) {
         return JSON.stringify(obj, null, 4);
     });
-    Handlebars.registerHelper('increment', function(value, defaultValue) {
-        if(!value){
+
+    Handlebars.registerHelper('add', function (v1, v2) {
+        return Number(v1) + Number(v2);
+    });
+
+    Handlebars.registerHelper('subtract', function (v1, v2) {
+        return Number(v1) - Number(v2);
+    });
+
+    Handlebars.registerHelper('multiply', function (v1, v2) {
+        return Number(v1) * Number(v2);
+    });
+
+    Handlebars.registerHelper('divide', function (v1, v2) {
+        return Number(v1) / Number(v2);
+    });
+
+
+    Handlebars.registerHelper('dotget', function (record, propertyID) {
+        return helpers.getValue(record, propertyID)
+    });
+
+    Handlebars.registerHelper('getValue', function (record, propertyID) {
+        return helpers.getValue(record, propertyID)
+    });
+
+    Handlebars.registerHelper('getValues', function (record, propertyID) {
+        return helpers.getValues(record, propertyID)
+    });
+
+    Handlebars.registerHelper('increment', function (value, defaultValue) {
+        if (!value) {
             value = defaultValue
         }
         value = Number(value)
         return value + 1
     });
-    Handlebars.registerHelper('default', function(value, defaultValue) {
+    Handlebars.registerHelper('default', function (value, defaultValue) {
         return value || defaultValue
     });
 
-    Handlebars.registerHelper('textToHTML', function(value) {
+    Handlebars.registerHelper('textToHTML', function (value) {
 
         let values = value.split('\n')
         let content = ''
-        for (let v of values){
+        for (let v of values) {
             content += `<p>${v}</p>`
         }
         return new Handlebars.SafeString(content);
 
-        
+
     });
 
-    
 
-    Handlebars.registerHelper('getStars', function(value, bestRating) {
+
+    Handlebars.registerHelper('getStars', function (value, bestRating) {
         value = Number(value) || 0
         bestRating = Number(bestRating) || 5
         let fullStarsNo = Math.floor(value);
         let halfStarsNo = Math.ceil(value - fullStarsNo);
         let emptyStarsNo = (bestRating) - fullStarsNo - halfStarsNo;
 
-        
+
         let stars = []
         for (let i = 0; i < fullStarsNo; i++) {
             stars.push("starFull")
@@ -265,7 +339,7 @@ async function renderHtml(templateID, data, options) {
         template = await getTemplate(templateID);
     }
 
-    let content =  template(data);
+    let content = template(data, { data: options });
 
     return content;
 }

@@ -18,6 +18,7 @@
     "build": "rm -rf dist && npm run build:cjs && npm run build:esm",
     "build:cjs": "npx esbuild src/index.js --bundle --minify --platform=node --format=cjs --outfile=dist/index.cjs",
     "build:esm": "npx esbuild src/index.js --bundle --minify --platform=node --format=esm --outfile=dist/index.js",
+    "dev": "node src/index.js",
     "start": "node dist/index.js"
   },
   "keywords": [],
@@ -27,6 +28,7 @@
   "dependencies": {
     "express": "^5.2.1",
     "handlebars": "^4.7.9",
+    "jsonld_helpers": "github:tactik8/jsonldHelpers_v1",
     "uuid": "^14.0.0"
   },
   "devDependencies": {
