@@ -470,9 +470,10 @@ export class WebSite extends BaseClass {
         webpage.templateID = this.templateID
         webpage.wrapper = this.wrapper
 
-        console.log('url', url, this.url)
 
-        webpage.url = String(new URL(url, this.url))
+        try {
+        webpage.url = (new URL(url, this.url) || "").toString()
+        } catch(err){}
         this.add(webpage)
         return webpage
     }

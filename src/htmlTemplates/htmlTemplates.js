@@ -315,7 +315,6 @@ async function init() {
         for (let i = 0; i < emptyStarsNo; i++) {
             stars.push("starEmpty")
         }
-        console.log('s', stars)
         return stars
     });
 
