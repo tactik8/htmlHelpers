@@ -6,16 +6,17 @@
   "module": "dist/index.js",
   "exports": {
     ".": {
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "default": "./dist/index.cjs"
     }
   },
   "files": [
     "dist"
   ],
- "scripts": {
+  "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "build": "rm -rf dist && npm run build:cjs && npm run build:esm && cp -r ./src/templates ./dist/templates/ ",
+    "build": "rm -rf dist && npm run build:cjs && npm run build:esm && mkdir -p ./dist/templates && cp -r ./src/templates/. ./dist/templates/",
     "build:cjs": "npx esbuild src/index.js --bundle --minify --platform=node --format=cjs --outfile=dist/index.cjs",
     "build:esm": "npx esbuild src/index.js --bundle --minify --platform=node --format=esm --outfile=dist/index.js",
     "dev": "node testServer.cjs",
@@ -25,6 +26,9 @@
   "author": "Tactik8",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "express": "^5.2.1",
     "handlebars": "^4.7.7",
