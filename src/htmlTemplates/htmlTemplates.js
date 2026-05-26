@@ -21,18 +21,18 @@ import { readFile } from 'node:fs/promises';
 
 // Get the directory name of the current module
 export function getDirname(importMetaUrl) {
-  // 1. Check if __dirname exists (CommonJS environment)
-  if (typeof __dirname !== 'undefined') {
-    return __dirname;
-  }
-  
-  // 2. Fall back to import.meta.url (ESM environment)
-  if (importMetaUrl) {
-    return dirname(fileURLToPath(importMetaUrl));
-  }
+    // 1. Check if __dirname exists (CommonJS environment)
+    if (typeof __dirname !== 'undefined') {
+        return __dirname;
+    }
 
-  // 3. Fallback to process.cwd() if no context is provided
-  return process.cwd();
+    // 2. Fall back to import.meta.url (ESM environment)
+    if (importMetaUrl) {
+        return dirname(fileURLToPath(importMetaUrl));
+    }
+
+    // 3. Fallback to process.cwd() if no context is provided
+    return process.cwd();
 }
 
 const currentDirectory = getDirname(import.meta.url);
@@ -109,11 +109,25 @@ async function getTemplate(templateID) {
 
     if (1 == 1) {
 
-        let relDirectory = join(currentDirectory, '../')
 
-        let templateFilePath = join(relDirectory, 'templates', `${templateID}.html`);
+        let data
+        try {
 
-        const data = await readFile(templateFilePath, 'utf8');
+            let relDirectory = currentDirectory
+
+            let templateFilePath = join(relDirectory, 'templates', `${templateID}.html`);
+
+            data = await readFile(templateFilePath, 'utf8');
+
+        } catch (err) {
+
+            let relDirectory = join(currentDirectory, '../')
+
+            let templateFilePath = join(relDirectory, 'templates', `${templateID}.html`);
+
+            data = await readFile(templateFilePath, 'utf8');
+
+        }
 
         content = data
 
