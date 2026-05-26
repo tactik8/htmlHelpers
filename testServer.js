@@ -3,7 +3,7 @@ import helpers from 'jsonld_helpers'
 
 import { records } from 'jsonld_helpers'
 
-import htmlHelpers from './dist/index.js'
+import { htmlHelpers } from './src/index.js'
 
 
 import express from 'express';

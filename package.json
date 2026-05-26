@@ -19,7 +19,7 @@
     "build": "rm -rf dist && npm run build:cjs && npm run build:esm && mkdir -p ./dist/templates && cp -r ./src/templates/. ./dist/templates/",
     "build:cjs": "npx esbuild src/index.js --bundle --minify --platform=node --format=cjs --outfile=dist/index.cjs",
     "build:esm": "npx esbuild src/index.js --bundle --minify --platform=node --format=esm --outfile=dist/index.js",
-    "dev": "node testServer.cjs",
+    "dev": "node testServer.js",
     "start": "node dist/index.js"
   },
   "keywords": [],

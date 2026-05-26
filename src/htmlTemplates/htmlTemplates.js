@@ -20,12 +20,24 @@ import { readFile } from 'node:fs/promises';
 
 
 // Get the directory name of the current module
+export function getDirname(importMetaUrl) {
+  // 1. Check if __dirname exists (CommonJS environment)
+  if (typeof __dirname !== 'undefined') {
+    return __dirname;
+  }
+  
+  // 2. Fall back to import.meta.url (ESM environment)
+  if (importMetaUrl) {
+    return dirname(fileURLToPath(importMetaUrl));
+  }
 
-let __dirname = __dirname 
+  // 3. Fallback to process.cwd() if no context is provided
+  return process.cwd();
+}
 
-const currentDir = typeof __dirname !== 'undefined' 
-  ? __dirname 
-  : dirname(fileURLToPath(import.meta.url));
+const currentDirectory = getDirname(import.meta.url);
+
+
 
 
 export const htmlTemplates = {
@@ -96,8 +108,10 @@ async function getTemplate(templateID) {
 
 
     if (1 == 1) {
-        //let templateFilePath = join(__dirname, '../../templates', `${templateID}.html`);
-        let templateFilePath = join(__dirname, 'templates', `${templateID}.html`);
+
+        let relDirectory = join(currentDirectory, '../')
+
+        let templateFilePath = join(relDirectory, 'templates', `${templateID}.html`);
 
         const data = await readFile(templateFilePath, 'utf8');
 
