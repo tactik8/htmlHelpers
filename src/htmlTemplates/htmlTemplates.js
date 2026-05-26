@@ -21,6 +21,8 @@ import { readFile } from 'node:fs/promises';
 
 // Get the directory name of the current module
 
+let __dirname = __dirname || undefined
+
 const currentDir = typeof __dirname !== 'undefined' 
   ? __dirname 
   : dirname(fileURLToPath(import.meta.url));
