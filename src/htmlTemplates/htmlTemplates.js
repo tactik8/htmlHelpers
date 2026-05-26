@@ -21,7 +21,7 @@ import { readFile } from 'node:fs/promises';
 
 // Get the directory name of the current module
 
-let __dirname = __dirname || ""
+let __dirname = __dirname 
 
 const currentDir = typeof __dirname !== 'undefined' 
   ? __dirname 
