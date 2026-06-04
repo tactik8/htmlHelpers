@@ -18,7 +18,7 @@ function formatRecord(value, baseUrl){
         return value.map(x => formatRecord(x, baseUrl))
     }
 
-    if(value?.['@type'] || valeu?.['@id']){
+    if(value?.['@type'] || value?.['@id']){
 
         let url = new URL(encodeURIComponent("/" + value?.['@idb'] || ""), baseUrl)
 
