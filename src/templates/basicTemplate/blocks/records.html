@@ -15,12 +15,24 @@
 <div class="container col-xxl-8 px-4 py-5">
     
         {{#if (isdefined this.potentialActions)}}
-        <div class="float-end text-end">
-            {{> dropdown this.potentialActions}}
-        </div>
+            {{#each (toArray this.potentialActions)}}
+                <div class="float-end text-end">
+                    {{> dropdown this}}
+                </div>
 
+            {{/each}}
         {{/if}}
     
+         {{#if (isdefined this.potentialAction)}}
+            {{#each (toArray this.potentialAction)}}
+                <div class="float-end text-end">
+                    {{> dropdown this}}
+                </div>
+
+            {{/each}}
+        {{/if}}
+    
+
 
 
    
