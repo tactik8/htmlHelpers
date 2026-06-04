@@ -20,9 +20,15 @@ function formatRecord(value, baseUrl){
 
     if(value?.['@type'] || value?.['@id']){
 
-        let url = new URL(encodeURIComponent("/" + value?.['@id'] || ""), baseUrl)
+        let linkID = encodeURIComponent(value?.['@id'] || "")
 
-        value['@id'] = `<a href="${url}">${value?.['@id'] || "na"}</a>`
+        baseUrl = baseUrl || ""
+
+        if(baseUrl.endsWith('/') == false){
+            baseUrl = baseUrl + '/'
+        }
+
+        value['@id'] = `<a href="${baseUrl}${linkID}">${value?.['@id'] || "na"}</a>`
 
         for(let k of Object.keys(value)){
             value[k] = formatRecord(value[k], baseUrl)
