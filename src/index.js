@@ -20,7 +20,7 @@ function formatRecord(value, baseUrl){
 
     if(value?.['@type'] || value?.['@id']){
 
-        let url = new URL(encodeURIComponent("/" + value?.['@idb'] || ""), baseUrl)
+        let url = new URL(encodeURIComponent("/" + value?.['@id'] || ""), baseUrl)
 
         value['@id'] = `<a href="${url}">${value?.['@id'] || "na"}</a>`
 

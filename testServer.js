@@ -32,7 +32,10 @@ async function test() {
 
     // 
 
+    let gg = htmlHelpers.formatRecord(t1, "http://localhost:3002/")
     
+
+
 
     // Init website
     let website = new htmlHelpers.classElements.WebSite()
