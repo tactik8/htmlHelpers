@@ -7,7 +7,7 @@ export const htmlHelpers = {
 
     classElements: classElements,
     testRecords: testRecords,
-    formatRecord: formatrecord
+    formatRecord: formatRecord
 
 }
 
