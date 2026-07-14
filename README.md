@@ -2,7 +2,7 @@
 Library to generate html components from jsonld records
 
 ## How to install
-npm install github:tactik8/htmlHelpers
+npm install github:tactik8/helpers_html_templates
 
 ## How to use
 
