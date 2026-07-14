@@ -10,13 +10,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
        <link rel="stylesheet" href="style.css">
 
-    
+    <style>
+   :root {
+            /* 1. The Hex Colors */
+            --bs-primary: #ff5733;    
+            --bs-secondary: #33ffd1;  
+            --bs-success: #28a745;
+
+            /* 2. The RGB equivalents (Crucial for Bootstrap 5.3 utilities) */
+            /* You can get these numbers by converting your hex to rgb */
+            --bs-primary-rgb: 255, 87, 51;     /* #ff5733 */
+            --bs-secondary-rgb: 51, 255, 209;  /* #33ffd1 */
+            --bs-success-rgb: 40, 167, 69;     /* #28a745 */
+        }
+    </style>
 </head>
     
 
 <body>
 
     <div class="container">
+
+        <div class="p-4 mb-4 bg-light border rounded">
+            <h2 class="text-primary">Color Verification Test</h2>
+            <p>If the setup is working, the button below will be your custom orange color:</p>
+            <button class="btn btn-primary">Custom Primary Button</button>
+            <button class="btn btn-secondary">Custom Secondary Button</button>
+        </div>
+
 
         <h1>Tests</h1>
         <hr>
@@ -51,19 +72,6 @@
 
     </div>
 
-<script type="importmap">
-    {
-      "imports": {
-        "uuid": "https://cdn.skypack.dev/uuid",
-        "krakenschema": "https://tactik8.github.io/krakenJsSchema/dist/main.js",
-        "krakenrecord": "https://tactik8.github.io/krakenJsLibraryRecord/dist/main.js",
-        "krakenhelpers": "https://tactik8.github.io/krakenHelpers/dist/main.js",
-        "krakenhtml": "https://tactik8.github.io/krakenHtml/dist/main.js",
- "krakenthing": "https://tactik8.github.io/kraken_thing_js/dist/main.js",
-          "handlebars": "https://esm.run/handlebars"
-      }
-    }
-  </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

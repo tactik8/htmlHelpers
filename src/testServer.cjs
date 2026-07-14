@@ -5,7 +5,7 @@ const helpers = require('jsonld_helpers')
 
 const { records } = require('jsonld_helpers')
 
-const { htmlHelpers } = require('./dist/index.cjs')
+const { htmlHelpers } = require('../dist/index.cjs')
 
 
 const express = require('express')

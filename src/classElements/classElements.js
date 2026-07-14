@@ -1,6 +1,9 @@
 
-import * as helpers from 'jsonld_helpers'
+import helpers_jsonld from 'helpers_jsonld'
 import { htmlTemplates } from '../htmlTemplates/htmlTemplates.js'
+import { htmlFormatHelpers } from "../htmlFormatHelpers.js";
+
+import * as brand from './stylesheet.js'
 
 export class BaseClass {
     constructor(record, options) {
@@ -140,9 +143,12 @@ export class BaseClass {
 
         // Render template
         if (this.templateID) {
-          
-
-            this.text = await htmlTemplates.render(this.templateID, this.record, this.options)
+            
+            let r = JSON.parse(JSON.stringify(this.record || {}, null, 4))
+            if(this.brand){
+                r.head = brand.getStyleHtml(this.brand)
+            }
+            this.text = await htmlTemplates.render(this.templateID, r, this.options)
         }
 
         // Render wrapper
@@ -385,7 +391,19 @@ export class WebPage extends BaseClass {
     constructor(record, options) {
         super(record, options)
         this.templateID = 'basicTemplate/blocks/page'
+        this.website
+        this.brand 
 
+    }
+
+    get head(){
+        return this.record?.head || ""
+
+    }
+
+    set head(value){
+        this.record = this.record || {}
+        this.record.head = value
     }
 
     section(content) {
@@ -408,6 +426,41 @@ export class WebPage extends BaseClass {
         return this.add(new p(content))
     }
 
+
+
+    async baseElement(record, baseUrl){
+        
+        baseUrl = baseUrl || this.baseUrl || this.website.baseUrl
+
+        record = helpers_jsonld.simplify(record)
+
+        record = htmlFormatHelpers.record(record, baseUrl )
+        
+        if(Array.isArray(record) || Array.isArray(record?.result) || record?.["@type"] == "ItemList" || record?.["@type"] == "Collection"){
+            this.name = `Records (${record?.result?.length || record?.itemListElement?.length || record?.itemListElement?.length || record?.length || 0})` 
+            
+            let s = this.section()
+            let h = new H2(this.name)
+            s.add(h)
+
+            let e = new Records(record)
+            this.add(e)
+        } else {
+            this.name = record?.name || record?.["@id"] || "Record"
+
+            let s = this.section()
+            let h = new H2(this.name)
+            s.add(h)
+
+            let e = new Record(record)
+            this.add(e)
+        }
+
+        return await this.get()
+    }
+
+
+
 }
 
 
@@ -416,6 +469,9 @@ export class WebSite extends BaseClass {
     constructor(record, options) {
         super(record, options)
         this.templateID = 'basicTemplate/components/page'
+        this.brand
+        this.head = ''
+        this.body = ''
 
     }
 
@@ -441,6 +497,7 @@ export class WebSite extends BaseClass {
     }
 
 
+   
 
     get footer() {
         return this.wpFooter
@@ -467,6 +524,10 @@ export class WebSite extends BaseClass {
 
     webpage(url) {
         let webpage = new WebPage(JSON.parse(JSON.stringify(this.record, null, 4)))
+        webpage.baseUrl = this.baseUrl
+        webpage.brand = this.brand
+        webpage.head = this.head
+        webpage.website = this
         webpage.templateID = this.templateID
         webpage.wrapper = this.wrapper
 
@@ -481,7 +542,7 @@ export class WebSite extends BaseClass {
     }
 
 
-
+   
 
 }
 
